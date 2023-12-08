@@ -187,7 +187,7 @@ func (c *Client) sendWithSignatureV3(request tchttp.Request, response tchttp.Res
 	//log.Println("authorization", authorization)
 
 	headers["Authorization"] = authorization
-	url := "https://" + request.GetDomain() + request.GetPath()
+	url := request.GetScheme() + "://" + request.GetDomain() + request.GetPath()
 	if canonicalQueryString != "" {
 		url = url + "?" + canonicalQueryString
 	}
