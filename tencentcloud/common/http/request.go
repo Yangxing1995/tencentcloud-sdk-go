@@ -30,6 +30,8 @@ type Request interface {
 	GetUrl() string
 	GetVersion() string
 	SetDomain(string)
+	SetScheme(string)
+	GetScheme() string
 	SetHttpMethod(string)
 }
 
