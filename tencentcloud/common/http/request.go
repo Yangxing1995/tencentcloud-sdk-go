@@ -36,6 +36,7 @@ type Request interface {
 type BaseRequest struct {
 	httpMethod string
 	domain     string
+	scheme     string
 	path       string
 	params     map[string]string
 	formParams map[string]string
@@ -69,6 +70,14 @@ func (r *BaseRequest) SetDomain(domain string) {
 	r.domain = domain
 }
 
+func (r *BaseRequest) GetScheme() string {
+	return r.scheme
+}
+
+func (r *BaseRequest) SetScheme(scheme string) {
+	r.scheme = scheme
+}
+
 func (r *BaseRequest) SetHttpMethod(method string) {
 	switch strings.ToUpper(method) {
 	case POST:
@@ -92,9 +101,9 @@ func (r *BaseRequest) GetService() string {
 
 func (r *BaseRequest) GetUrl() string {
 	if r.httpMethod == GET {
-		return "https://" + r.domain + r.path + "?" + GetUrlQueriesEncoded(r.params)
+		return r.scheme + "://" + r.domain + r.path + "?" + GetUrlQueriesEncoded(r.params)
 	} else if r.httpMethod == POST {
-		return "https://" + r.domain + r.path
+		return r.scheme + "://" + r.domain + r.path
 	} else {
 		return ""
 	}
