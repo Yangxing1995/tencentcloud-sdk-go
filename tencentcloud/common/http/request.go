@@ -17,6 +17,8 @@ const (
 
 	RootDomain = "tencentcloudapi.com"
 	Path       = "/"
+
+	defaultScheme = "https"
 )
 
 type Request interface {
@@ -73,6 +75,9 @@ func (r *BaseRequest) SetDomain(domain string) {
 }
 
 func (r *BaseRequest) GetScheme() string {
+	if r.scheme == "" {
+		return defaultScheme
+	}
 	return r.scheme
 }
 
@@ -103,9 +108,9 @@ func (r *BaseRequest) GetService() string {
 
 func (r *BaseRequest) GetUrl() string {
 	if r.httpMethod == GET {
-		return r.scheme + "://" + r.domain + r.path + "?" + GetUrlQueriesEncoded(r.params)
+		return r.GetScheme() + "://" + r.domain + r.path + "?" + GetUrlQueriesEncoded(r.params)
 	} else if r.httpMethod == POST {
-		return r.scheme + "://" + r.domain + r.path
+		return r.GetScheme() + "://" + r.domain + r.path
 	} else {
 		return ""
 	}
