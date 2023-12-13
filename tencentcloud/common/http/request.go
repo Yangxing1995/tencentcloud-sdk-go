@@ -85,7 +85,7 @@ func (r *BaseRequest) GetRealDomain() string {
 }
 
 func (r *BaseRequest) SetRealDomain(domain string) {
-	r.domain = domain
+	r.realDomain = domain
 }
 
 func (r *BaseRequest) GetScheme() string {
