@@ -34,12 +34,15 @@ type Request interface {
 	SetDomain(string)
 	SetScheme(string)
 	GetScheme() string
+	SetRealDomain(string)
+	GetRealDomain() string
 	SetHttpMethod(string)
 }
 
 type BaseRequest struct {
 	httpMethod string
 	domain     string
+	realDomain string
 	scheme     string
 	path       string
 	params     map[string]string
@@ -71,6 +74,17 @@ func (r *BaseRequest) GetDomain() string {
 }
 
 func (r *BaseRequest) SetDomain(domain string) {
+	r.domain = domain
+}
+
+func (r *BaseRequest) GetRealDomain() string {
+	if r.realDomain != "" {
+		return r.realDomain
+	}
+	return r.domain
+}
+
+func (r *BaseRequest) SetRealDomain(domain string) {
 	r.domain = domain
 }
 

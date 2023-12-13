@@ -61,7 +61,7 @@ func checkAuthParams(request tchttp.Request, credential *Credential, method stri
 
 func getStringToSign(request tchttp.Request) string {
 	method := request.GetHttpMethod()
-	domain := request.GetDomain()
+	domain := request.GetRealDomain()
 	path := request.GetPath()
 
 	var buf bytes.Buffer

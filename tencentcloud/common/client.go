@@ -86,7 +86,7 @@ func (c *Client) sendWithSignatureV1(request tchttp.Request, response tchttp.Res
 
 func (c *Client) sendWithSignatureV3(request tchttp.Request, response tchttp.Response) (err error) {
 	headers := map[string]string{
-		"Host":               request.GetDomain(),
+		"Host":               request.GetRealDomain(),
 		"X-TC-Action":        request.GetAction(),
 		"X-TC-Version":       request.GetVersion(),
 		"X-TC-Timestamp":     request.GetParams()["Timestamp"],
